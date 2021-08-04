@@ -14,14 +14,14 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
-    $router->resource('/articles', 'ArticleController');
-    $router->resource('/passwords', 'PasswordController');
-    $router->resource('/websites', 'WebsiteController');
-    $router->resource('/domains', 'DomainController');
-    $router->resource('/servers', 'ServerController');
-    $router->resource('/domainnames', 'DomainNameController');
-    $router->resource('/status', 'StatusController');
-    $router->get('/api/domains', 'ResourceController@domains');
-    $router->get('/api/websites', 'ResourceController@websites');
-    $router->get('/api/status', 'ResourceController@status');
+    $router->resource('/posts', 'NbPostController');
+//    $router->resource('/passwords', 'PasswordController');
+//    $router->resource('/websites', 'WebsiteController');
+//    $router->resource('/domains', 'DomainController');
+//    $router->resource('/servers', 'ServerController');
+//    $router->resource('/domainnames', 'DomainNameController');
+//    $router->resource('/status', 'StatusController');
+//    $router->get('/api/domains', 'ResourceController@domains');
+//    $router->get('/api/websites', 'ResourceController@websites');
+//    $router->get('/api/status', 'ResourceController@status');
 });

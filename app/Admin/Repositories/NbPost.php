@@ -2,10 +2,10 @@
 
 namespace App\Admin\Repositories;
 
-use App\Models\Password as Model;
+use App\Models\NbPost as Model;
 use Dcat\Admin\Repositories\EloquentRepository;
 
-class Password extends EloquentRepository
+class NbPost extends EloquentRepository
 {
     /**
      * Model.
@@ -13,9 +13,4 @@ class Password extends EloquentRepository
      * @var string
      */
     protected $eloquentClass = Model::class;
-
-    public function getParentColumn()
-    {
-        return 'domain_id';
-    }
 }

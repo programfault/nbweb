@@ -2,13 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Repositories\Domain;
+use App\Admin\Repositories\NbPost;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 
-class DomainController extends AdminController
+class NbPostController extends AdminController
 {
     /**
      * Make a grid builder.
@@ -17,16 +17,19 @@ class DomainController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(Domain::with('domain'), function (Grid $grid) {
+        return Grid::make(new NbPost(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('name');
+            $grid->column('title');
+            $grid->column('slug');
             $grid->column('description');
-            $grid->column('domain.name','所属领域')->sortable();
+            $grid->column('content');
+            $grid->column('website_id');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-
+        
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
+        
             });
         });
     }
@@ -40,11 +43,13 @@ class DomainController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, Domain::with('domain'), function (Show $show) {
+        return Show::make($id, new NbPost(), function (Show $show) {
             $show->field('id');
-            $show->field('name');
+            $show->field('title');
+            $show->field('slug');
             $show->field('description');
-            $show->field('domain.name','parent');
+            $show->field('content');
+            $show->field('website_id');
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -57,16 +62,14 @@ class DomainController extends AdminController
      */
     protected function form()
     {
-        return Form::make(Domain::with('domain'), function (Form $form) {
+        return Form::make(new NbPost(), function (Form $form) {
             $form->display('id');
-            $form->select('domain_id')->options(function ($id) {
-                $domain = \App\Models\Domain::find($id);
-                if ($domain) {
-                    return [$domain->id => $domain->name];
-                }
-            })->ajax('api/domains');
-            $form->text('name');
+            $form->text('title');
+            $form->text('slug');
             $form->text('description');
+            $form->text('content');
+            $form->text('website_id');
+        
             $form->display('created_at');
             $form->display('updated_at');
         });

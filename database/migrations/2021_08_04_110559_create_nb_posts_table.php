@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordsTable extends Migration
+class CreateNbPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreatePasswordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('passwords', function (Blueprint $table) {
+        Schema::create('nb_posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
-            $table->string('username')->default('');
-            $table->string('password')->default('');
+            $table->string('title')->default('');
+            $table->string('slug')->default('');
+            $table->string('description')->default('');
+            $table->text('content');
+            $table->integer('website_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +31,6 @@ class CreatePasswordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('passwords');
+        Schema::dropIfExists('nb_posts');
     }
 }
